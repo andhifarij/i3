@@ -1,0 +1,32 @@
+#!/bin/bash
+# Based on https://aur.archlinux.org/packages/playerctl/
+
+INSTANCE="${BLOCK_INSTANCE}"
+
+if [[ "${INSTANCE}" != "" ]]; then
+  ARGUMENTS="--player ${INSTANCE}"
+fi
+
+ICON_PLAY=""
+ICON_PAUSE=""
+ICON_STOP=""
+CUR_ICON=""
+
+
+PLAYER_STATUS=$(playerctl ${ARGUMENTS} status)
+INFO_TITLE=$(playerctl ${ARGUMENTS} metadata title)
+INFO_ALBUM=$(playerctl ${ARGUMENTS} metadata album)
+INFO_ARTIST=$(playerctl ${ARGUMENTS} metadata artist)
+
+if [[ "${PLAYER_STATUS}" = "Paused" ]]; then
+  echo ""
+elif [[ "${PLAYER_STATUS}" = "Playing" ]]; then
+  echo=""
+else
+  echo ""
+fi
+
+if [[ "${INFO_TITLE}" != "" ]] && [[ "${INFO_ARTIST}" != "" ]]; then
+  echo " ${INFO_ARTIST} - ${INFO_TITLE}"
+  echo " ${INFO_ARTIST} - ${INFO_TITLE}"
+fi
